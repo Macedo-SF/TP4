@@ -18,4 +18,5 @@ public:
 
 	friend std::ostream& operator <<(std::ostream& out, const index& i);
 	friend std::istream& operator >>(std::istream& in, const index& i);
+	friend bool operator ==(const index& l, const index& r);
 };

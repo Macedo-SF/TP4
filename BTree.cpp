@@ -68,11 +68,11 @@ void BTree::insert(index k)
     }
 }
 
-void BTree::remove(int k)
+void BTree::remove(index k)
 {
     if (!root)
     {
-        cout << "The tree is empty\n";
+        std::cout << "The tree is empty\n";
         return;
     }
 

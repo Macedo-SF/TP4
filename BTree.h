@@ -26,5 +26,5 @@ public:
     void insert(index k);
 
     // The main function that removes a new key in thie B-Tree
-    void remove(int k);
+    void remove(index k);
 };

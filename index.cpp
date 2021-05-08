@@ -31,3 +31,7 @@ std::istream& operator >>(std::istream& in, index& i) {
 	i.bytes = (1 + i.key.length() + sizeof(i.pos)); //likely wrong
 	return in;
 }
+bool operator ==(const index& l, const index& r) {
+	if (l.key == r.key and l.pos == r.pos and l.bytes == r.bytes) { return true; }
+	return false;
+}
