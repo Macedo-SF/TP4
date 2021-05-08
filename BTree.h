@@ -6,6 +6,11 @@ class BTree
 {
     BTreeNode* root; // Pointer to root node
     int t;  // Minimum degree
+    /*
+    * every node, other than root, must have at least t-1 keys
+    * every internal node, other than root, must have at least t children
+    * every node must have at most 2t-1 keys, therefore has at most 2t children
+    */
 
 public:
 
@@ -27,4 +32,6 @@ public:
 
     // The main function that removes a new key in thie B-Tree
     void remove(index k);
+
+    void _export(std::string _filename);
 };

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <fstream>
 #include "index.h"
 
 class BTreeNode
@@ -72,6 +73,10 @@ public:
     // A function to merge idx-th child of the node with (idx+1)th child of
     // the node
     void merge(int idx);
+
+    // A function to export all nodes in a subtree rooted with this node
+    void _export(std::fstream& stream, int& counter);
+    void _exportNode(std::fstream& stream, int& counter);
 
     // Make the BTree friend of this so that we can access private members of this
     // class in BTree functions

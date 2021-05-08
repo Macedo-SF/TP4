@@ -22,7 +22,7 @@ index::index(char* input, int tell) {
 }
 
 std::ostream& operator <<(std::ostream& out, const index& i) {
-	out << i.key << ';' << i.pos;
+	out << i.key << '_' << i.pos;
 	return out;
 }
 std::istream& operator >>(std::istream& in, index& i) {
