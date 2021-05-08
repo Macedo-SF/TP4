@@ -149,6 +149,10 @@
     <ClInclude Include="BTreeNode.h" />
     <ClInclude Include="index.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="netflix_titles_corrigido.csv" />
+    <None Include="teste.csv" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

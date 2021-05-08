@@ -33,9 +33,13 @@ public:
     // child array C[].  The Child y must be full when this function is called
     void splitChild(int i, BTreeNode* y);
 
+    // A function that returns the index of the first key that is greater
+    // or equal to k
+    int findKey(index k);
+
     // A wrapper function to remove the key k in subtree rooted with
     // this node.
-    void remove(int k);
+    void remove(index k);
 
     // A function to remove the key present in idx-th position in
     // this node which is a leaf
@@ -47,11 +51,11 @@ public:
 
     // A function to get the predecessor of the key- where the key
     // is present in the idx-th position in the node
-    int getPred(int idx);
+    index getPred(int idx);
 
     // A function to get the successor of the key- where the key
     // is present in the idx-th position in the node
-    int getSucc(int idx);
+    index getSucc(int idx);
 
     // A function to fill up the child node present in the idx-th
     // position in the C[] array if that child has less than t-1 keys
