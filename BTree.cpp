@@ -106,8 +106,14 @@ void BTree::_export(std::string _filename)
 
         if (!_file.is_open()) { std::cout << _filename + " could not be opened" << std::endl; return; }
         _file << counter << std::endl;
-        counter++;
-        root->_export(_file, counter);
+        if (root->leaf) { counter = -1; root->_exportNode(_file, counter); }
+        else { counter++; root->_exportNode(_file, counter); root->_export(_file, counter); }
         _file.close();
     }
+}
+
+void BTree::_printLevels()
+{
+    if (root->leaf) { root->_printLevel(); }
+    else { root->_printLevel(); root->_printLevels(); }
 }

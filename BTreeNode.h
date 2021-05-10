@@ -78,6 +78,9 @@ public:
     void _export(std::fstream& stream, int& counter);
     void _exportNode(std::fstream& stream, int& counter);
 
+    void _printLevels();
+    void _printLevel();
+
     // Make the BTree friend of this so that we can access private members of this
     // class in BTree functions
     friend class BTree;
