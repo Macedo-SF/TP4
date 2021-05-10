@@ -30,7 +30,7 @@ void BTreeNode::traverse()
             C[i]->traverse();
         std::cout << " " << keys[i];
     }
-
+    std::cout << " | " << std::endl; //testing if nodes are correct
     // Print the subtree rooted with last child
     if (leaf == false)
         C[i]->traverse();
@@ -455,4 +455,60 @@ void BTreeNode::merge(int idx)
     // Freeing the memory occupied by sibling
     delete(sibling);
     return;
+}
+
+// Function to export all nodes in a subtree rooted with this node
+void BTreeNode::_export(std::fstream& stream, int& counter)
+{
+    // There are n keys and n+1 children, travers through n keys
+    // and first n children
+    int i;
+    /*
+    for (i = 0; i < n; i++)
+    {
+        std::cout << counter + i << ";" << keys[i];
+        if (i != 2*t-2) { std::cout << ";"; }
+    }
+    for (i; i < 2*t-1; i++) {
+        std::cout << counter + i << ";" << index();
+        if (i != 2*t-2) { std::cout << ";"; }
+    }
+    counter += i;
+    //stream << std::endl;
+    std::cout << std::endl;
+    */
+    this->_exportNode(stream, counter);
+    for (i = 0; i < n; i++)
+    {
+        if (!leaf) {
+            C[i]->_exportNode(stream, counter);
+        }
+    }
+    for (i = 0; i < n; i++) {
+        if (!leaf) {
+            C[i]->_export(stream, counter);
+        }
+    }
+}
+
+// Function to export all keys in this node
+void BTreeNode::_exportNode(std::fstream& stream, int& counter)
+{
+    // There are n keys and n+1 children, travers through n keys
+    // and first n children
+    int i;
+
+    for (i = 0; i < n; i++)
+    {
+        std::cout << counter + i << ";" << keys[i];
+        if (i != 2 * t - 2) { std::cout << ";"; }
+    }
+    for (i; i < 2 * t - 1; i++) {
+        std::cout << counter + i << ";" << index();
+        if (i != 2 * t - 2) { std::cout << ";"; }
+    }
+    counter += i;
+    //stream << std::endl;
+    std::cout << std::endl;
+
 }

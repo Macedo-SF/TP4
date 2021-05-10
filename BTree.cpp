@@ -94,3 +94,20 @@ void BTree::remove(index k)
     }
     return;
 }
+
+// function to export the tree
+void BTree::_export(std::string _filename)
+{
+    if (root != NULL) { 
+        int counter = 1;
+        std::fstream _file;
+
+        _file.open(_filename, std::ios::out);//| std::ios::app | std::ios::trunc);
+
+        if (!_file.is_open()) { std::cout << _filename + " could not be opened" << std::endl; return; }
+        _file << counter << std::endl;
+        counter++;
+        root->_export(_file, counter);
+        _file.close();
+    }
+}
