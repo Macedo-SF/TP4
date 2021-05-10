@@ -34,4 +34,6 @@ public:
     void remove(index k);
 
     void _export(std::string _filename);
+
+    void _printLevels();
 };

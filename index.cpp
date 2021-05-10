@@ -1,7 +1,7 @@
 #include "index.h"
 
 index::index() {
-	key = "no_key";
+	key = "*";
 	pos = bytes = 0;
 }
 index::~index() {

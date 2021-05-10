@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
 
-	BTree test(2);
+	BTree test(3);
 	fstream _file;
 
 	_file.open("teste.csv", ios::in);
@@ -23,7 +23,7 @@ int main() {
 	
 	
 	int _c = 0;
-	while (_c<12) {
+	while (_c<24) {
 		int tell = _file.tellg();
 		_file.getline(buffer, tam);
 		index _insert(buffer, tell);
@@ -35,8 +35,9 @@ int main() {
 	//string _to_find = "s7432";
 	//cout << test._search(_to_find) << endl;
 
-	test.traverse();
+	//test.traverse();
 	test._export("test_export.csv");
+	test._printLevels();
 	cout << endl;
 	/*
 	while (_c != 0) {
