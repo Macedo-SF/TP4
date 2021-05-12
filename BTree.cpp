@@ -142,15 +142,18 @@ void BTree::_import(std::string _filename) {
     token = strtok(NULL, ";");
 
     this->t = std::stoi(token);
-    int counter = 2;
 
-    while (_file.getline(buffer, tam, ';')) {
-        //std::cout << buffer << " e " << counter << std::endl;
-        if (buffer[0] != '-' and buffer[0]!=std::to_string(counter)[0]) { 
-            index temp(buffer);
-            this->insert(temp);
+    while (_file.getline(buffer, tam)) {
+        std::stringstream s(buffer);
+        std::string str;
+        int counter = 2;
+        while (std::getline(s, str, ';')) {
+            if (str!="-1" and str!=std::to_string(counter)) {
+                index temp(str);
+                this->insert(temp);
+            }
+            else { counter++; }
         }
-        else { counter++; }
     }
     _file.close();
 }
@@ -178,7 +181,8 @@ void BTree::_index(std::string _filename, std::string type) {
             _file.getline(buffer, tam);
             if (_file.eof()) { break; }
             index _insert(buffer, tell);
-            if (_insert.key != "") { this->insert(_insert); }
+            char cond = buffer[0];
+            if (_insert.key != "" and cond != '-') { this->insert(_insert); }
         }
     }
     if (type == "type") {
@@ -191,7 +195,8 @@ void BTree::_index(std::string _filename, std::string type) {
             getline(ss, str, ';');
             getline(ss, str, ';');
             index _insert(str, tell);
-            if (_insert.key != "") { this->insert(_insert); }
+            char cond = buffer[0];
+            if (_insert.key != "" and cond != '-') { this->insert(_insert); }
         }
     }
     if (type == "title") {
@@ -205,7 +210,8 @@ void BTree::_index(std::string _filename, std::string type) {
             getline(ss, str, ';');
             getline(ss, str, ';');
             index _insert(str, tell);
-            if (_insert.key != "") { this->insert(_insert); }
+            char cond = buffer[0];
+            if (_insert.key != "" and cond != '-') { this->insert(_insert); }
         }
     }
     if (type == "director") {
@@ -220,7 +226,8 @@ void BTree::_index(std::string _filename, std::string type) {
             getline(ss, str, ';');
             getline(ss, str, ';');
             index _insert(str, tell);
-            if(_insert.key!=""){ this->insert(_insert); }
+            char cond = buffer[0];
+            if (_insert.key != "" and cond != '-') { this->insert(_insert); }
         }
     }
     if (type == "cast") {
@@ -236,7 +243,8 @@ void BTree::_index(std::string _filename, std::string type) {
             getline(ss, str, ';');
             getline(ss, str, ';');
             index _insert(str, tell);
-            if (_insert.key != "") { this->insert(_insert); }
+            char cond = buffer[0];
+            if (_insert.key != "" and cond != '-') { this->insert(_insert); }
         }
     }
     if (type == "country") {
@@ -253,7 +261,8 @@ void BTree::_index(std::string _filename, std::string type) {
             getline(ss, str, ';');
             getline(ss, str, ';');
             index _insert(str, tell);
-            if (_insert.key != "") { this->insert(_insert); }
+            char cond = buffer[0];
+            if (_insert.key != "" and cond != '-') { this->insert(_insert); }
         }
     }
     if (type == "year") {
@@ -272,7 +281,8 @@ void BTree::_index(std::string _filename, std::string type) {
             getline(ss, str, ';');
             getline(ss, str, ';');
             index _insert(str, tell);
-            if (_insert.key != "") { this->insert(_insert); }
+            char cond = buffer[0];
+            if (_insert.key != "" and cond != '-') { this->insert(_insert); }
         }
     }
     _file.close();

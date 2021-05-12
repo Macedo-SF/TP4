@@ -3,10 +3,6 @@
 
 using namespace std;
 
-int menu();
-void addToFile(string& filename);
-index removeFromFile(string& filename, const int& pos);
-
 int main() {
 	//navigation
 	int option;
@@ -82,7 +78,22 @@ int main() {
 		else if (option == 3) {
 			system("cls");
 
+			string to_find;
+			cout << "Procurar por: ";
+			cin >> to_find;
 			//pesquisar na árvore de type, criar o feature a partir do arquivo
+			vector<index> found = typeTree._find(to_find);
+
+			cout << endl << found.size() << " resultados encontrados" << endl;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+			for (index i : found) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				f.print();
+			}
 
 			system("pause");
 			system("cls");
@@ -90,7 +101,22 @@ int main() {
 		else if (option == 4) {
 			system("cls");
 
+			string to_find;
+			cout << "Procurar por: ";
+			cin >> to_find;
 			//pesquisar na árvore de title, criar o feature a partir do arquivo
+			vector<index> found = titleTree._find(to_find);
+
+			cout << endl << found.size() << " resultados encontrados" << endl;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+			for (index i : found) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				f.print();
+			}
 
 			system("pause");
 			system("cls");
@@ -98,7 +124,22 @@ int main() {
 		else if (option == 5) {
 			system("cls");
 			
+			string to_find;
+			cout << "Procurar por: ";
+			cin >> to_find;
 			//pesquisar na árvore de director, criar o feature a partir do arquivo
+			vector<index> found = directorTree._find(to_find);
+
+			cout << endl << found.size() << " resultados encontrados" << endl;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+			for (index i : found) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				f.print();
+			}
 
 			system("pause");
 			system("cls");
@@ -107,7 +148,22 @@ int main() {
 		else if (option == 6) {
 			system("cls");
 
+			string to_find;
+			cout << "Procurar por: ";
+			cin >> to_find;
 			//pesquisar na árvore de cast, criar o feature a partir do arquivo
+			vector<index> found = castTree._find(to_find);
+
+			cout << endl << found.size() << " resultados encontrados" << endl;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+			for (index i : found) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				f.print();
+			}
 
 			system("pause");
 			system("cls");
@@ -116,7 +172,22 @@ int main() {
 		else if (option == 7) {
 			system("cls");
 
+			string to_find;
+			cout << "Procurar por: ";
+			cin >> to_find;
 			//pesquisar na árvore de country, criar o feature a partir do arquivo
+			vector<index> found = countryTree._find(to_find);
+
+			cout << endl << found.size() << " resultados encontrados" << endl;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+			for (index i : found) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				f.print();
+			}
 
 			system("pause");
 			system("cls");
@@ -125,7 +196,23 @@ int main() {
 		else if (option == 8) {
 			system("cls");
 
+			string to_find;
+			cout << "Procurar por: ";
+			cin >> to_find;
 			//pesquisar na árvore de year, criar o feature a partir do arquivo
+			vector<index> found = yearTree._find(to_find);
+
+			cout << endl << found.size() << " resultados encontrados" << endl;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+			for (index i : found) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				f.print();
+			}
+
 
 			system("pause");
 			system("cls");
@@ -135,24 +222,156 @@ int main() {
 			system("cls");
 
 			string key, ind;
-			cout << "Index to search: ";
+			vector<index> to_remove;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+
+			cout << "Index a procurar: ";
 			cin >> ind;
-			cout << endl << "Key to remove: ";
+			cout << endl << "Chave a remover: ";
 			cin >> key;
 			if (ind == "id") {
 				vector<index> found = idTree._find(key);
 				if (!found.empty()) {
+					cout << endl << found.size() << " resultados encontrados" << endl;
 					for (index i : found) {
-						cout << i.key << endl;
-						cout << "Remove this feature?" << endl;
+						file.seekg(i.pos);
+						file.getline(buffer, tam);
+						feature f(buffer);
+						f.print();
+						cout << "Remover esse feature?" << endl;
 						cin >> key;
-						if (key == "y" or key == "yes") {
-
+						if (key == "s" or key == "sim") {
+							to_remove.push_back(i);
+						}
+					}
+				}
+			}
+			if (ind == "type") {
+				vector<index> found = typeTree._find(key);
+				if (!found.empty()) {
+					cout << endl << found.size() << " resultados encontrados" << endl;
+					for (index i : found) {
+						file.seekg(i.pos);
+						file.getline(buffer, tam);
+						feature f(buffer);
+						f.print();
+						cout << "Remover esse feature?" << endl;
+						cin >> key;
+						if (key == "s" or key == "sim") {
+							to_remove.push_back(i);
+						}
+					}
+				}
+			}
+			if (ind == "title") {
+				vector<index> found = titleTree._find(key);
+				if (!found.empty()) {
+					cout << endl << found.size() << " resultados encontrados" << endl;
+					for (index i : found) {
+						file.seekg(i.pos);
+						file.getline(buffer, tam);
+						feature f(buffer);
+						f.print();
+						cout << "Remover esse feature?" << endl;
+						cin >> key;
+						if (key == "s" or key == "sim") {
+							to_remove.push_back(i);
+						}
+					}
+				}
+			}
+			if (ind == "director") {
+				vector<index> found = directorTree._find(key);
+				if (!found.empty()) {
+					cout << endl << found.size() << " resultados encontrados" << endl;
+					for (index i : found) {
+						file.seekg(i.pos);
+						file.getline(buffer, tam);
+						feature f(buffer);
+						f.print();
+						cout << "Remover esse feature?" << endl;
+						cin >> key;
+						if (key == "s" or key == "sim") {
+							to_remove.push_back(i);
+						}
+					}
+				}
+			}
+			if (ind == "cast") {
+				vector<index> found = castTree._find(key);
+				if (!found.empty()) {
+					cout << endl << found.size() << " resultados encontrados" << endl;
+					for (index i : found) {
+						file.seekg(i.pos);
+						file.getline(buffer, tam);
+						feature f(buffer);
+						f.print();
+						cout << "Remover esse feature?" << endl;
+						cin >> key;
+						if (key == "s" or key == "sim") {
+							to_remove.push_back(i);
+						}
+					}
+				}
+			}
+			if (ind == "country") {
+				vector<index> found = countryTree._find(key);
+				if (!found.empty()) {
+					cout << endl << found.size() << " resultados encontrados" << endl;
+					for (index i : found) {
+						file.seekg(i.pos);
+						file.getline(buffer, tam);
+						feature f(buffer);
+						f.print();
+						cout << "Remover esse feature?" << endl;
+						cin >> key;
+						if (key == "s" or key == "sim") {
+							to_remove.push_back(i);
+						}
+					}
+				}
+			}
+			if (ind == "year") {
+				vector<index> found = yearTree._find(key);
+				if (!found.empty()) {
+					cout << endl << found.size() << " resultados encontrados" << endl;
+					for (index i : found) {
+						file.seekg(i.pos);
+						file.getline(buffer, tam);
+						feature f(buffer);
+						f.print();
+						cout << "Remover esse feature?" << endl;
+						cin >> key;
+						if (key == "s" or key == "sim") {
+							to_remove.push_back(i);
 						}
 					}
 				}
 			}
 			//escolher a árvore, encontrar e remover de todas as árvores, adicionar à delID
+			
+			for (index i : to_remove) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				idTree.remove(index(f.show_id, i.pos));
+				typeTree.remove(index(f.type, i.pos));
+				titleTree.remove(index(f.title, i.pos));
+				directorTree.remove(index(f.director, i.pos));
+				castTree.remove(index(f.cast, i.pos));
+				countryTree.remove(index(f.country, i.pos));
+				yearTree.remove(index(f.release_year, i.pos));
+			}
+			//^esse metodo funciona apenas para valores únicos, por falta de tempo, terei de improvisar
+			file.close();
+			file.open(filename, ios::in | ios::out);
+			file.getline(buffer, tam);
+			for (index i : to_remove) {
+				file.seekp(i.pos);
+				file << "-";
+			}
 
 			system("pause");
 			system("cls");
@@ -173,6 +392,7 @@ int main() {
 		{
 			cout << "Esta opção não existe! Voltando ao menu..." << endl;
 			system("pause");
+			system("cls");
 		}
 	}
 }
