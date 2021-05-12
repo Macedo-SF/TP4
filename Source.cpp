@@ -10,6 +10,7 @@ index removeFromFile(string& filename, const int& pos);
 int main() {
 	//navigation
 	int option;
+	string filename = "teste.csv";
 	//a tree for each column to be indexed
 	BTree idTree(133); //max index size for the current file is 15B, up to 266 indexes per page
 	BTree typeTree(125); //max index size for the current file is 16B, up to 250 indexes per page
@@ -21,13 +22,13 @@ int main() {
 	BTree delID(133);
 
 	//indexing each to it's own tree
-	idTree._index("teste.csv", "id");
-	typeTree._index("teste.csv", "type");
-	titleTree._index("teste.csv", "title");
-	directorTree._index("teste.csv", "director");
-	castTree._index("teste.csv", "cast");
-	countryTree._index("teste.csv", "country");
-	yearTree._index("teste.csv", "year");
+	idTree._index(filename, "id");
+	typeTree._index(filename, "type");
+	titleTree._index(filename, "title");
+	directorTree._index(filename, "director");
+	castTree._index(filename, "cast");
+	countryTree._index(filename, "country");
+	yearTree._index(filename, "year");
 
 	//menu
 	while (true) {
@@ -58,7 +59,22 @@ int main() {
 		else if (option == 2) {
 			system("cls");
 			
+			string to_find;
+			cout << "Procurar por: ";
+			cin >> to_find;
 			//pesquisar na árvore de ID, criar o feature a partir do arquivo
+			vector<index> found = idTree._find(to_find);
+
+			cout << endl << found.size() <<" resultados encontrados" << endl;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+			for (index i : found) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				f.print();
+			}
 
 			system("pause");
 			system("cls");

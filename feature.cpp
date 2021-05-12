@@ -26,7 +26,7 @@ feature::feature(char *linha)
     getline(s, word, ';');
     date_added = word;
     getline(s, word, ';');
-    release_year = stoi(word);
+    release_year = word;
     getline(s, word, ';');
     rating = word;
     getline(s, word, ';');
