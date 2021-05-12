@@ -82,6 +82,24 @@ index BTreeNode::_search(std::string k)
 	return C[i]->_search(k);
 }
 
+void BTreeNode::_find(std::vector<index>& vec, const std::string& k) {
+	int i;
+
+	for (i = 0; i < n; i++)
+	{
+		std::string key = this->keys[i].key;
+		std::transform(key.begin(), key.end(), key.begin(), ::tolower);
+		if (key.find(k) != std::string::npos) { vec.push_back(this->keys[i]); }
+	}
+
+	for (i = 0; i < n + 1; i++)
+	{
+		if (!this->leaf) {
+			C[i]->_find(vec, k);
+		}
+	}
+}
+
 // A utility function to insert a new key in this node
 // The assumption is, the node must be non-full when this
 // function is called

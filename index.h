@@ -10,10 +10,12 @@ class index
 public:
 	std::string key;
 	int pos;
-	std::streamsize bytes;
+	//std::streamsize bytes;
 
 	index();
+	index(char* input);
 	index(char* input, int tell);
+	index(std::string input, int tell);
 	~index();
 
 	friend std::ostream& operator <<(std::ostream& out, const index& i);

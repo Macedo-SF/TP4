@@ -6,6 +6,11 @@ BTree::BTree(int _t)
 	root = NULL;  t = _t;
 }
 
+BTree::BTree()
+{
+    root = NULL;  t = 0;
+}
+
 // function to traverse the tree
 void BTree::traverse()
 {
@@ -26,6 +31,17 @@ index BTree::_search(std::string k)
     else {
         return root->_search(k);
     }
+}
+
+std::vector<index> BTree::_find(std::string k)
+{
+    std::vector<index> ret;
+    if (root != NULL) {
+        std::string find = k;
+        std::transform(find.begin(), find.end(), find.begin(), ::tolower);
+        root->_find(ret, find);
+    }
+    return ret;
 }
 
 // The main function that inserts a new key in this B-Tree
@@ -95,25 +111,169 @@ void BTree::remove(index k)
     return;
 }
 
-// function to export the tree
+// function to export the tree to file
 void BTree::_export(std::string _filename)
 {
     if (root != NULL) { 
         int counter = 1;
         std::fstream _file;
 
-        _file.open(_filename, std::ios::out);//| std::ios::app | std::ios::trunc);
+        _file.open(_filename, std::ios::out | std::ios::trunc); //consertar
 
         if (!_file.is_open()) { std::cout << _filename + " could not be opened" << std::endl; return; }
-        _file << counter << std::endl;
+        _file << counter << ";" << this->t << std::endl;
         if (root->leaf) { counter = -1; root->_exportNode(_file, counter); }
         else { counter++; root->_exportNode(_file, counter); root->_export(_file, counter); }
         _file.close();
     }
 }
 
+// function to import a tree from file
+void BTree::_import(std::string _filename) {
+    std::fstream _file;
+
+    _file.open(_filename, std::ios::in);
+    if (!_file.is_open()) { exit(-12); }
+
+    char buffer[tam + 1];
+    _file.getline(buffer, tam);
+
+    char* token = strtok(buffer,";"); //using _CRT_SECURE_NO_WARNINGS
+    token = strtok(NULL, ";");
+
+    this->t = std::stoi(token);
+    int counter = 2;
+
+    while (_file.getline(buffer, tam, ';')) {
+        //std::cout << buffer << " e " << counter << std::endl;
+        if (buffer[0] != '-' and buffer[0]!=std::to_string(counter)[0]) { 
+            index temp(buffer);
+            this->insert(temp);
+        }
+        else { counter++; }
+    }
+    _file.close();
+}
+
+
 void BTree::_printLevels()
 {
     if (root->leaf) { root->_printLevel(); }
     else { root->_printLevel(); root->_printLevels(); }
+}
+
+void BTree::_index(std::string _filename, std::string type) {
+    std::fstream _file;
+
+    _file.open(_filename, std::ios::in);
+    if (!_file.is_open()) { exit(-2); }
+
+    char buffer[tam + 1];
+
+    _file.getline(buffer, tam);
+
+    if (type == "id") {
+        while (!_file.eof()) {
+            int tell = _file.tellg();
+            _file.getline(buffer, tam);
+            if (_file.eof()) { break; }
+            index _insert(buffer, tell);
+            if (_insert.key != "") { this->insert(_insert); }
+        }
+    }
+    if (type == "type") {
+        while (!_file.eof()) {
+            int tell = _file.tellg();
+            _file.getline(buffer, tam);
+            if (_file.eof()) { break; }
+            std::stringstream ss(buffer);
+            std::string str;
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            index _insert(str, tell);
+            if (_insert.key != "") { this->insert(_insert); }
+        }
+    }
+    if (type == "title") {
+        while (!_file.eof()) {
+            int tell = _file.tellg();
+            _file.getline(buffer, tam);
+            if (_file.eof()) { break; }
+            std::stringstream ss(buffer);
+            std::string str;
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            index _insert(str, tell);
+            if (_insert.key != "") { this->insert(_insert); }
+        }
+    }
+    if (type == "director") {
+        while (!_file.eof()) {
+            int tell = _file.tellg();
+            _file.getline(buffer, tam);
+            if (_file.eof()) { break; }
+            std::stringstream ss(buffer);
+            std::string str;
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            index _insert(str, tell);
+            if(_insert.key!=""){ this->insert(_insert); }
+        }
+    }
+    if (type == "cast") {
+        while (!_file.eof()) {
+            int tell = _file.tellg();
+            _file.getline(buffer, tam);
+            if (_file.eof()) { break; }
+            std::stringstream ss(buffer);
+            std::string str;
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            index _insert(str, tell);
+            if (_insert.key != "") { this->insert(_insert); }
+        }
+    }
+    if (type == "country") {
+        while (!_file.eof()) {
+            int tell = _file.tellg();
+            _file.getline(buffer, tam);
+            if (_file.eof()) { break; }
+            std::stringstream ss(buffer);
+            std::string str;
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            index _insert(str, tell);
+            if (_insert.key != "") { this->insert(_insert); }
+        }
+    }
+    if (type == "year") {
+        while (!_file.eof()) {
+            int tell = _file.tellg();
+            _file.getline(buffer, tam);
+            if (_file.eof()) { break; }
+            std::stringstream ss(buffer);
+            std::string str;
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            getline(ss, str, ';');
+            index _insert(str, tell);
+            if (_insert.key != "") { this->insert(_insert); }
+        }
+    }
+    _file.close();
 }
