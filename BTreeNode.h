@@ -1,7 +1,11 @@
 #pragma once
 
 #include <fstream>
+#include <vector>
+#include <algorithm>
 #include "index.h"
+
+#define tam 3999
 
 class BTreeNode
 {
@@ -24,6 +28,8 @@ public:
     // A function to search a key in the subtree rooted with this node.   
     BTreeNode* search(char* k);   // returns NULL if k is not present.
     index _search(std::string k);   // returns empty if k is not present.
+
+    void _find(std::vector<index>& vec, const std::string& k);
 
     // A utility function to insert a new key in the subtree rooted with
     // this node. The assumption is, the node must be non-full when this
@@ -77,6 +83,9 @@ public:
     // A function to export all nodes in a subtree rooted with this node
     void _export(std::fstream& stream, int& counter);
     void _exportNode(std::fstream& stream, int& counter);
+
+    // A function to import a file to the tree
+    void _import(std::fstream& stream, int& counter);
 
     void _printLevels();
     void _printLevel();
