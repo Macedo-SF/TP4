@@ -32,7 +32,7 @@ int main() {
 		cout << "1. Inserir novo feature" << endl;
 		cout << "2. Pesquisar catalogo por ID" << endl;
 		cout << "3. Pesquisar catalogo por tipo" << endl;
-		cout << "4. Pesquisar catalogo por título" << endl;
+		cout << "4. Pesquisar catalogo por tÃ­tulo" << endl;
 		cout << "5. Pesquisar catalogo por diretor" << endl;
 		cout << "6. Pesquisar catalogo por elenco" << endl;
 		cout << "7. Pesquisar catalogo por pais" << endl;
@@ -47,7 +47,7 @@ int main() {
 		if (option == 1) {
 			system("cls");
 
-			//criar um feature e atualizar cada árvore
+			//criar um feature e atualizar cada Ã¡rvore
 
 			system("pause");
 			system("cls");
@@ -58,7 +58,7 @@ int main() {
 			string to_find;
 			cout << "Procurar por: ";
 			cin >> to_find;
-			//pesquisar na árvore de ID, criar o feature a partir do arquivo
+			//pesquisar na Ã¡rvore de ID, criar o feature a partir do arquivo
 			vector<index> found = idTree._find(to_find);
 
 			cout << endl << found.size() <<" resultados encontrados" << endl;
@@ -81,7 +81,9 @@ int main() {
 			string to_find;
 			cout << "Procurar por: ";
 			cin >> to_find;
-			//pesquisar na árvore de type, criar o feature a partir do arquivo
+
+			//pesquisar na Ã¡rvore de type, criar o feature a partir do arquivo
+
 			vector<index> found = typeTree._find(to_find);
 
 			cout << endl << found.size() << " resultados encontrados" << endl;
@@ -104,7 +106,9 @@ int main() {
 			string to_find;
 			cout << "Procurar por: ";
 			cin >> to_find;
-			//pesquisar na árvore de title, criar o feature a partir do arquivo
+
+			//pesquisar na Ã¡rvore de title, criar o feature a partir do arquivo
+
 			vector<index> found = titleTree._find(to_find);
 
 			cout << endl << found.size() << " resultados encontrados" << endl;
@@ -127,7 +131,8 @@ int main() {
 			string to_find;
 			cout << "Procurar por: ";
 			cin >> to_find;
-			//pesquisar na árvore de director, criar o feature a partir do arquivo
+			//pesquisar na Ã¡rvore de director, criar o feature a partir do arquivo
+
 			vector<index> found = directorTree._find(to_find);
 
 			cout << endl << found.size() << " resultados encontrados" << endl;
@@ -143,7 +148,6 @@ int main() {
 
 			system("pause");
 			system("cls");
-
 		}
 		else if (option == 6) {
 			system("cls");
@@ -151,7 +155,9 @@ int main() {
 			string to_find;
 			cout << "Procurar por: ";
 			cin >> to_find;
-			//pesquisar na árvore de cast, criar o feature a partir do arquivo
+
+			//pesquisar na Ã¡rvore de cast, criar o feature a partir do arquivo
+
 			vector<index> found = castTree._find(to_find);
 
 			cout << endl << found.size() << " resultados encontrados" << endl;
@@ -167,7 +173,6 @@ int main() {
 
 			system("pause");
 			system("cls");
-
 		}
 		else if (option == 7) {
 			system("cls");
@@ -175,7 +180,9 @@ int main() {
 			string to_find;
 			cout << "Procurar por: ";
 			cin >> to_find;
-			//pesquisar na árvore de country, criar o feature a partir do arquivo
+
+			//pesquisar na Ã¡rvore de country, criar o feature a partir do arquivo
+
 			vector<index> found = countryTree._find(to_find);
 
 			cout << endl << found.size() << " resultados encontrados" << endl;
@@ -199,7 +206,9 @@ int main() {
 			string to_find;
 			cout << "Procurar por: ";
 			cin >> to_find;
-			//pesquisar na árvore de year, criar o feature a partir do arquivo
+
+			//pesquisar na Ã¡rvore de year, criar o feature a partir do arquivo
+
 			vector<index> found = yearTree._find(to_find);
 
 			cout << endl << found.size() << " resultados encontrados" << endl;
@@ -213,10 +222,8 @@ int main() {
 				f.print();
 			}
 
-
 			system("pause");
 			system("cls");
-
 		}
 		else if (option == 9) {
 			system("cls");
@@ -350,7 +357,7 @@ int main() {
 					}
 				}
 			}
-			//escolher a árvore, encontrar e remover de todas as árvores, adicionar à delID
+			//escolher a Ã¡rvore, encontrar e remover de todas as Ã¡rvores, adicionar Ã  delID
 			
 			for (index i : to_remove) {
 				file.seekg(i.pos);
@@ -364,7 +371,7 @@ int main() {
 				countryTree.remove(index(f.country, i.pos));
 				yearTree.remove(index(f.release_year, i.pos));
 			}
-			//^esse metodo funciona apenas para valores únicos, por falta de tempo, terei de improvisar
+			//^esse metodo funciona apenas para valores Ãºnicos, por falta de tempo, terei de improvisar
 			file.close();
 			file.open(filename, ios::in | ios::out);
 			file.getline(buffer, tam);
@@ -375,7 +382,6 @@ int main() {
 
 			system("pause");
 			system("cls");
-
 		}
 		else if (option == 0) {
 			//exporting
@@ -390,22 +396,22 @@ int main() {
 		}
 		else
 		{
-			cout << "Esta opção não existe! Voltando ao menu..." << endl;
+			cout << "Esta opÃ§Ã£o nÃ£o existe! Voltando ao menu..." << endl;
 			system("pause");
 			system("cls");
 		}
 	}
 }
-//cadastro(inserir e remover) e consulta do banco de dados por indexação em arvore B
-	//sobrecarregar remoção para retornar o index marcado e jogar ele em outra árvore/arquivo
-//inserção e remoção locais /não precise reorganizar
-	//semelhante à passada mas
-//cada página da árvore com 4KB ou menos
-	//refazer os cálculos para o novo index com bytes
-	//uma maneira automática seria coletar todos os indexes antes da remoção e usar o maior como referência para
-	// o cálculo, 2t-1=4000/maxSize, mas isso ainda poderia dar errado ao inserir um maior
-//minimizar o número se seeks
-	//não sei como utilizar seeks no modelo atual, talvez use getline <-ler arquivo de index p/btree
+//cadastro(inserir e remover) e consulta do banco de dados por indexaÃ§Ã£o em arvore B
+	//sobrecarregar remoÃ§Ã£o para retornar o index marcado e jogar ele em outra Ã¡rvore/arquivo
+//inserÃ§Ã£o e remoÃ§Ã£o locais /nÃ£o precise reorganizar
+	//semelhante Ã  passada mas
+//cada pÃ¡gina da Ã¡rvore com 4KB ou menos
+	//refazer os cÃ¡lculos para o novo index com bytes
+	//uma maneira automÃ¡tica seria coletar todos os indexes antes da remoÃ§Ã£o e usar o maior como referÃªncia para
+	// o cÃ¡lculo, 2t-1=4000/maxSize, mas isso ainda poderia dar errado ao inserir um maior
+//minimizar o nÃºmero se seeks
+	//nÃ£o sei como utilizar seeks no modelo atual, talvez use getline <-ler arquivo de index p/btree
 
 //usar stringstream igual em index para importar index p/ arvore
-//usar um find(_), todo index tem "_", se não achar não importar
+//usar um find(_), todo index tem "_", se nÃ£o achar nÃ£o importar
