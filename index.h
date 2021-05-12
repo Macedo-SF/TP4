@@ -14,6 +14,7 @@ public:
 
 	index();
 	index(char* input);
+	index(std::string& input);
 	index(char* input, int tell);
 	index(std::string input, int tell);
 	~index();

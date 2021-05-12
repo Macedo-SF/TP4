@@ -9,6 +9,14 @@ index::index(char* input) {
 	key = strtok(input, "_");
 	pos = std::stoi(strtok(NULL, "_"));
 }
+index::index(std::string& input) {
+	std::stringstream s(input);
+	std::string temp;
+	std::getline(s, temp, '_');
+	key = temp;	
+	std::getline(s, temp);
+	pos = std::stoi(temp);
+}
 index::~index() {
 	//
 }
