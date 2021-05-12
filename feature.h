@@ -17,7 +17,7 @@ public:
     std::string cast = "NULL"; // Actors involved in the movie / show
     std::string country = "NULL"; // Country where the movie / show was produced
     std::string date_added = "NULL"; // Date it was added on Netflix
-    std::string release_year = 0; // Actual Release year of the move / show
+    std::string release_year = "NULL"; // Actual Release year of the move / show
     std::string rating = "NULL"; //TV Rating of the movie / show
     std::string duration = "NULL"; //Total Duration - in minutes or number of seasons
     std::string listed_in = "NULL"; //Genere
