@@ -82,7 +82,22 @@ int main() {
 		else if (option == 3) {
 			system("cls");
 
-			//pesquisar na árvore de type, criar o feature a partir do arquivo
+			string to_find;
+			cout << "Procurar por: ";
+			cin >> to_find;
+			//pesquisar na árvore de ID, criar o feature a partir do arquivo
+			vector<index> found = typeTree._find(to_find);
+
+			cout << endl << found.size() << " resultados encontrados" << endl;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+			for (index i : found) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				f.print();
+			}
 
 			system("pause");
 			system("cls");
@@ -90,33 +105,91 @@ int main() {
 		else if (option == 4) {
 			system("cls");
 
-			//pesquisar na árvore de title, criar o feature a partir do arquivo
+			string to_find;
+			cout << "Procurar por: ";
+			cin >> to_find;
+			//pesquisar na árvore de ID, criar o feature a partir do arquivo
+			vector<index> found = titleTree._find(to_find);
+
+			cout << endl << found.size() << " resultados encontrados" << endl;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+			for (index i : found) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				f.print();
+			}
 
 			system("pause");
 			system("cls");
 		}
 		else if (option == 5) {
 			system("cls");
-			
-			//pesquisar na árvore de director, criar o feature a partir do arquivo
+
+			string to_find;
+			cout << "Procurar por: ";
+			cin >> to_find;
+			//pesquisar na árvore de ID, criar o feature a partir do arquivo
+			vector<index> found = directorTree._find(to_find);
+
+			cout << endl << found.size() << " resultados encontrados" << endl;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+			for (index i : found) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				f.print();
+			}
 
 			system("pause");
 			system("cls");
-
 		}
 		else if (option == 6) {
 			system("cls");
 
-			//pesquisar na árvore de cast, criar o feature a partir do arquivo
+			string to_find;
+			cout << "Procurar por: ";
+			cin >> to_find;
+			//pesquisar na árvore de ID, criar o feature a partir do arquivo
+			vector<index> found = castTree._find(to_find);
+
+			cout << endl << found.size() << " resultados encontrados" << endl;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+			for (index i : found) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				f.print();
+			}
 
 			system("pause");
 			system("cls");
-
 		}
 		else if (option == 7) {
 			system("cls");
 
-			//pesquisar na árvore de country, criar o feature a partir do arquivo
+			string to_find;
+			cout << "Procurar por: ";
+			cin >> to_find;
+			//pesquisar na árvore de ID, criar o feature a partir do arquivo
+			vector<index> found = countryTree._find(to_find);
+
+			cout << endl << found.size() << " resultados encontrados" << endl;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+			for (index i : found) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				f.print();
+			}
 
 			system("pause");
 			system("cls");
@@ -125,11 +198,25 @@ int main() {
 		else if (option == 8) {
 			system("cls");
 
-			//pesquisar na árvore de year, criar o feature a partir do arquivo
+			string to_find;
+			cout << "Procurar por: ";
+			cin >> to_find;
+			//pesquisar na árvore de ID, criar o feature a partir do arquivo
+			vector<index> found = yearTree._find(to_find);
+
+			cout << endl << found.size() << " resultados encontrados" << endl;
+			fstream file(filename, ios::in);
+			char buffer[tam + 1];
+			file.getline(buffer, tam);
+			for (index i : found) {
+				file.seekg(i.pos);
+				file.getline(buffer, tam);
+				feature f(buffer);
+				f.print();
+			}
 
 			system("pause");
 			system("cls");
-
 		}
 		else if (option == 9) {
 			system("cls");
@@ -156,7 +243,6 @@ int main() {
 
 			system("pause");
 			system("cls");
-
 		}
 		else if (option == 0) {
 			//exporting
@@ -173,6 +259,7 @@ int main() {
 		{
 			cout << "Esta opção não existe! Voltando ao menu..." << endl;
 			system("pause");
+			system("cls");
 		}
 	}
 }
